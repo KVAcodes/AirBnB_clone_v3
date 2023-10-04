@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" View that handles all default RESTFul API actions for the User
+"""The View that handles all default RESTFul API actions for the User
 object.
 """
 from flask import jsonify, abort, request
