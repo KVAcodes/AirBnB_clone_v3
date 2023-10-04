@@ -98,4 +98,3 @@ class TestFileStorage(unittest.TestCase):
         """Tests if the get method returns None if cls or id not found."""
         get_t = DBStorage()
         self.assertEqual(get_t.count(), len(get_t.all()))
-

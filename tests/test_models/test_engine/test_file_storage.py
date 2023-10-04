@@ -113,3 +113,15 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+    @unittest.skipIf(models.storage_t == 'db'. "not testing file storage")
+    def test_get_returns_None(self):
+        """Tests if the get method returns None if cls or id not found."""
+        get_t = DBStorage()
+        self.assertEqual(get_t.get(DBStorage, "loremipsum"), None)
+
+    @unittest.skipIf(models.storage_t == 'db'. "not testing file storage")
+    def test_count_no_cls(self):
+        """Tests if the get method returns None if cls or id not found."""
+        get_t = DBStorage()
+        self.assertEqual(get_t.count(), len(get_t.all()))
