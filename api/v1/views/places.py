@@ -36,7 +36,7 @@ def get_place(place_id):
         abort(404)
 
 
-@app_views.route('/place/<place_id>',
+@app_views.route('/places/<place_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_place(place_id):
     """Deletes a Place object with id matching place_id.
@@ -65,9 +65,8 @@ def create_place(city_id):
             if not user:
                 abort(404)
             if 'name' not in place_json:
-                abort(404, "Missing Name")
-            place_created = Place(**place_json, city_id=city_id,
-                                  user_id=user.id)
+                abort(400, "Missing Name")
+            place_created = Place(**place_json, city_id=city_id)
             place_created.save()
             return jsonify(place_created.to_dict()), 201
         else:
