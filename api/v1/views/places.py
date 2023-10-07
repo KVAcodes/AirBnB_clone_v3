@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from models import storage
 from models.city import City
 from models.place import Place
-from models.user immport User
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places',
@@ -66,7 +66,8 @@ def create_place(city_id):
                 abort(404)
             if 'name' not in place_json:
                 abort(404, "Missing Name")
-            place_created = Place(**place_json, city_id=city_id, user_id=user.id)
+            place_created = Place(**place_json, city_id=city_id,
+                                  user_id=user.id)
             place_created.save()
             return jsonify(place_created.to_dict()), 201
         else:
@@ -84,7 +85,8 @@ def update_place(place_id):
     if stored_place:
         if request.is_json:
             updated_dict = stored_place.to_dict()
-            keys_to_ignore = ['id', 'user_id','city_id', 'created_at', 'updated_at']
+            keys_to_ignore = ['id', 'user_id', 'city_id', 'created_at',
+                              'updated_at']
             place_retrieved = request.get_json()
             for key, val in place_retrieved.items():
                 if key not in keys_to_ignore and key in updated_dict:
